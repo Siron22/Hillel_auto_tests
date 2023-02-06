@@ -9,7 +9,7 @@ from hillel_auto.utilities.browsers import Browser
 from hillel_auto.utilities.useful_func import get_browser_name, get_screenshot_directory, get_base_url
 from hillel_auto.utilities.project_exceptions import UnsupportedBrowserError
 from hillel_auto.pages.main_page import MainPage
-
+from hillel_auto.utilities.user import User
 
 
 @pytest.fixture(scope='session')
@@ -35,16 +35,16 @@ def driver(browser_name):
 
 @pytest.fixture()
 def main_page(driver):
-    login_page = MainPage(driver)
-    login_page.navigate()
-    return login_page
+    main_page = MainPage(driver)
+    main_page.navigate()
+    return main_page
 
 
- @pytest.fixture(scope='session')
+@pytest.fixture(scope='session')
 def valid_user():
-    return User('standard_user', 'secret_sauce')
-#
-#
+    return User("Pierce", "Nicolas", "Shany.Windler@gmail.com", "Wednesday1XxXx")
+
+
 # @pytest.fixture(scope='session')
 # def locked_out_user():
 #     return User('locked_out_user', 'secret_sauce')

@@ -1,9 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-
 from hillel_auto.utilities.useful_func import get_base_url
 from hillel_auto.pages.base_page import BasePage
-
 
 
 class MainPage(BasePage):
@@ -65,4 +63,6 @@ class MainPage(BasePage):
     def navigate(self):
         self.driver.get(get_base_url())
 
-    
+
+
+
