@@ -5,3 +5,5 @@ class User:
         self.lastname = lastname
         self.email = email
         self.password = password
+
+# TODO: Make user`s data generation from file .json

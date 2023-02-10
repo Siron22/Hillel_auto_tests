@@ -1,0 +1,82 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webdriver import WebDriver
+from hillel_auto.pages.user_profile.garage_page import GaragePage
+from hillel_auto.pages.base_page import BasePage
+
+
+class LoginPopUp(BasePage):
+    TEXT_LOG_IN_LOCATOR = (By.CSS_SELECTOR, '.modal-title')
+    BUTTON_CROSS_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
+    FIELD_EMAIL_LOCATOR = (By.ID, 'signinEmail')
+    FIELD_PASSWORD_LOCATOR = (By.ID, 'signinPassword')
+    CHECK_BOX_REMEMBER_ME_LOCATOR = (By.ID, 'remember')
+    BUTTON_FORGOT_PASSWORD_LOCATOR = (By.CSS_SELECTOR, 'button.btn-link:nth-child(2)')
+    BUTTON_REGISTRATION_LOCATOR = (By.CSS_SELECTOR, 'button.btn:nth-child(1)')
+    BUTTON_LOGIN_LOCATOR = (By.CSS_SELECTOR, 'button.btn-primary:nth-child(2)')
+
+    def __init__(self, driver: WebDriver):
+        super().__init__(driver)
+
+    @property
+    def text_log_in(self):
+        return self.element(LoginPopUp.TEXT_LOG_IN_LOCATOR)
+
+    @property
+    def button_cross(self):
+        return self.element(LoginPopUp.BUTTON_CROSS_LOCATOR)
+
+    @property
+    def field_email(self):
+        return self.element(LoginPopUp.FIELD_EMAIL_LOCATOR)
+
+    @property
+    def field_password(self):
+        return self.element(LoginPopUp.FIELD_PASSWORD_LOCATOR)
+
+    @property
+    def check_box_remember_me(self):
+        return self.element(LoginPopUp.CHECK_BOX_REMEMBER_ME_LOCATOR)
+
+    @property
+    def button_forgot_password(self):
+        return self.element(LoginPopUp.BUTTON_FORGOT_PASSWORD_LOCATOR)
+
+    @property
+    def button_registration(self):
+        return self.element(LoginPopUp.BUTTON_REGISTRATION_LOCATOR)
+
+    @property
+    def button_login(self):
+        return self.element(LoginPopUp.BUTTON_LOGIN_LOCATOR)
+
+    def enter_email(self, email):
+        self.field_email.send_keys(email)
+
+    def enter_password(self, password):
+        self.field_password.send_keys(password)
+
+    def click_login_button(self):
+        self.button_login.click()
+
+    def _fill_login_form_and_click_login_button(self, email, password):
+        self.enter_email(email)
+        self.enter_password(password)
+        self.click_login_button()
+
+    def successful_login(self, email, password):
+        self._fill_login_form_and_click_login_button(email, password)
+        garage_page = GaragePage(self.driver)
+        return garage_page
+
+    def remember_me_enable(self):
+        check_box_remember_me = self.check_box_remember_me.click()
+        return check_box_remember_me
+
+    def click_registration_button(self):
+        self.button_registration.click()
+
+
+
+
+
+

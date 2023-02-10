@@ -2,7 +2,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
+from hillel_auto.utilities.useful_func import get_base_url
 
 class BasePage(object):
 
@@ -13,6 +13,9 @@ class BasePage(object):
         # return self.driver.find_element(*locator)
         return WebDriverWait(self.driver, timeout=timeout).until(EC.visibility_of_element_located(locator))
 
+    def navigate(self):
+        self.driver.get(get_base_url())
+
     def is_element_not_displayed(self, locator, timeout=3):
         try:
             WebDriverWait(self.driver, timeout=timeout).until(EC.visibility_of_element_located(locator))
@@ -21,10 +24,3 @@ class BasePage(object):
             is_not_displayed = True
         return is_not_displayed
 
-    def is_element_displayed(self, locator, timeout=3):
-        try:
-            WebDriverWait(self.driver, timeout=timeout).until(EC.visibility_of_element_located(locator))
-            is_displayed = False
-        except TimeoutException:
-            is_displayed = True
-        return is_displayed

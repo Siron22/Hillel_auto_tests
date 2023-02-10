@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from hillel_auto.utilities.useful_func import get_base_url
 from hillel_auto.pages.base_page import BasePage
 
 
@@ -11,7 +10,7 @@ class MainPage(BasePage):
     BUTTON_ABOUT_LOCATOR = (By.CSS_SELECTOR, 'button.header-link:nth-child(2)')
     BUTTON_CONTACTS_LOCATOR = (By.CSS_SELECTOR, 'button.header-link:nth-child(3)')
     BUTTON_GUEST_LOGIN_LOCATOR = (By.CSS_SELECTOR, 'button.header-link:nth-child(1)')
-    BUTTON_SIGNIN_LOCATOR = (By.CSS_SELECTOR, '.btn-outline-white')
+    BUTTON_SIGNIN_LOCATOR = (By.XPATH, '//*/div[2]/button[2]')
     BUTTON_SIGNUP_LOCATOR = (By.CSS_SELECTOR, '.hero-descriptor_btn')
     STRING1_LOCATOR = (By.CSS_SELECTOR, '.hero-descriptor_title') #Do more!
     STRING2_LOCATOR = (By.CSS_SELECTOR, '.hero-descriptor_descr')  #With the help of ...
@@ -60,8 +59,13 @@ class MainPage(BasePage):
     def video_locator(self):
         return self.element(MainPage.VIDEO_LOCATOR)
 
-    def navigate(self):
-        self.driver.get(get_base_url())
+
+
+    def click_sign_in_button(self):
+        self.button_signin.click()
+
+    def click_sign_up_button(self):
+        self.button_signup.click()
 
 
 
