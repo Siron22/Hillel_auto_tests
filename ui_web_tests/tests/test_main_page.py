@@ -3,7 +3,6 @@ import pytest
 
 
 def test_main_page_is_open(driver, main_page):
-    main_page.click_sign_in_button()
     assert 'Hillel Qauto' in driver.title
 
 
