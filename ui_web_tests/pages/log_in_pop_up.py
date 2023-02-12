@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from hillel_auto.pages.user_profile.garage_page import GaragePage
-from hillel_auto.pages.base_page import BasePage
+
+from ui_web_tests.pages.restore_access_page import RestoreAccessPage
+from ui_web_tests.pages.user_profile.garage_page import GaragePage
+from ui_web_tests.pages.base_page import BasePage
 
 
 class LoginPopUp(BasePage):
@@ -75,8 +77,9 @@ class LoginPopUp(BasePage):
     def click_registration_button(self):
         self.button_registration.click()
 
-
-
-
+    def click_forgot_password_button(self):
+        self.button_forgot_password.click()
+        restore_access_page = RestoreAccessPage(self.driver)
+        restore_access_page.text_restore.is_displayed()
 
 

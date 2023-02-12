@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from hillel_auto.pages.base_page import BasePage
+from ui_web_tests.pages.base_page import BasePage
 
 class GaragePage(BasePage):
 

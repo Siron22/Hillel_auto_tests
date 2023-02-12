@@ -21,5 +21,6 @@ def get_browser_name():
 
 
 def get_screenshot_directory():
-    return get_config().get('project', 'screenshot-directory')
+    screen_dir = get_config().get('project', 'screenshot-directory')
+    return os.path.join(get_root_directory(), screen_dir)
 

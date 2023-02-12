@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from hillel_auto.pages.main_page import MainPage
-from hillel_auto.pages.user_profile.garage_page import GaragePage
+from ui_web_tests.pages.main_page import MainPage
+from ui_web_tests.pages.user_profile.garage_page import GaragePage
 
 
 class RegistrationPopUp(MainPage):

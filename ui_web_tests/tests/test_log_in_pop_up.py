@@ -20,12 +20,17 @@ def test_remember_me_button_enable(log_in_pop_up):
     assert log_in_pop_up.check_box_remember_me.is_selected()
 
 
-def test_registration_button_click(log_in_pop_up, registration_pop_up):
+def test_registration_button_click(log_in_pop_up, class_registration_pop_up):
     log_in_pop_up.click_registration_button()
-    assert 'Registration' in registration_pop_up.text_registration.text
-
-    # не получается победить этот метод, пришлось добавить registration_pop_up
+    assert 'Registration' in class_registration_pop_up.text_registration.text
+    # не получается победить этот метод,  пришлось добавить class_registration_pop_up
     # assert log_in_pop_up.is_element_not_displayed(log_in_pop_up.CHECK_BOX_REMEMBER_ME_LOCATOR)
+
+
+def test_forgot_password_button_click(log_in_pop_up, class_restore_access_pop_up):
+    log_in_pop_up.click_forgot_password_button()
+    assert 'Restore access' in class_restore_access_pop_up.text_restore.text
+    # Не нравится мне этот тест. Получается два раза создаю класс RestoreAccessPage
 
 
 def test_successful_login(log_in_pop_up, test_user):
