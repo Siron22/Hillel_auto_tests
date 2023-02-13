@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from ui_web_tests.pages.main_page import MainPage
+from ui_web_tests.pages.base_page import BasePage
 from ui_web_tests.pages.user_profile.garage_page import GaragePage
 
 
-class RegistrationPopUp(MainPage):
+class RegistrationPopUp(BasePage):
 
     TEXT_REGISTRATION_LOCATOR = (By.CSS_SELECTOR, '.modal-title')
     BUTTON_CROSS_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
@@ -52,7 +52,7 @@ class RegistrationPopUp(MainPage):
         return self.element(RegistrationPopUp.BUTTON_REGISTER_LOCATOR)
 
     def go_to_page(self):
-        self.navigate()
+        self.navigate_to_main()
         self.click_sign_up_button()
 
     def enter_name(self, name):

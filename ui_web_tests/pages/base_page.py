@@ -13,7 +13,7 @@ class BasePage(object):
         # return self.driver.find_element(*locator)
         return WebDriverWait(self.driver, timeout=timeout).until(EC.visibility_of_element_located(locator))
 
-    def navigate(self):
+    def navigate_to_main(self):
         self.driver.get(get_base_url())
 
     def is_element_not_displayed(self, locator, timeout=3):
