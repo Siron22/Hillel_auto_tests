@@ -7,5 +7,6 @@ setup(name='hillel_auto_selenium_test',
       install_requires=['pytest',
                         'selenium',
                         'webdriver-manager',
+                        'allure-pytest'
                         ]
       )
