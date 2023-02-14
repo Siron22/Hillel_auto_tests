@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from ui_web_tests.pages.registration_pop_up import RegistrationPopUp
@@ -51,12 +52,15 @@ class LoginPopUp(BasePage):
     def button_login(self):
         return self.element(LoginPopUp.BUTTON_LOGIN_LOCATOR)
 
+    @allure.step('Enter email {email}')
     def enter_email(self, email):
         self.field_email.send_keys(email)
 
+    @allure.step('Enter password {password}')
     def enter_password(self, password):
         self.field_password.send_keys(password)
 
+    @allure.step('Click login button')
     def click_login_button(self):
         self.button_login.click()
 

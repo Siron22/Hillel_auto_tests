@@ -1,5 +1,6 @@
 import os
 import pytest
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -10,9 +11,6 @@ from ui_web_tests.utilities.useful_func import get_browser_name, get_screenshot_
 from ui_web_tests.utilities.project_exceptions import UnsupportedBrowserError
 from ui_web_tests.pages.main_page import MainPage
 from ui_web_tests.utilities.user import User
-from ui_web_tests.pages.log_in_pop_up import LoginPopUp
-from ui_web_tests.pages.registration_pop_up import RegistrationPopUp
-from ui_web_tests.pages.restore_access_page import RestoreAccessPage
 
 
 @pytest.fixture(scope='session')
@@ -34,30 +32,24 @@ def driver(browser_name):
     driver.quit()
 
 
+@allure.step('Prepare user`s data')
 @pytest.fixture(scope='session')
 def test_user():
     return User("Pierce", "Nicolas", "Shany.Windler@gmail.com", "Wednesday1XxXx")
 
+@allure.step('Navigate to main page')
 @pytest.fixture()
 def main_page(driver):
     main_page = MainPage(driver)
     main_page.navigate_to_main()
     return main_page
 
-@pytest.fixture()
-def registration_pop_up(driver):
-    main_page = MainPage(driver)
-    main_page.navigate_to_main()
-    main_page.click_sign_up_button()
-    registration_pop_up = RegistrationPopUp(driver)
-    return registration_pop_up
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument
     # execute all other hooks to obtain the report object
     outcome = yield
     rep = outcome.get_result()
-
     # we only look at actual failing test calls, not setup/teardown
     if rep.when == "call" and rep.failed:
 
@@ -66,6 +58,6 @@ def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument
         file_name = f"{item.name}_{datetime.datetime.now().strftime('%Y_%m_%d-%H_%M')}.png"
         file_path = os.path.join(get_screenshot_directory(), file_name)
         driver.save_screenshot(file_path)
-        # allure.attach(driver.get_, name='My Test', attachment_type=allure.attachment_type.TEXT)
+        allure.attach.file(file_path, name='Test failed screen', attachment_type=allure.attachment_type.PNG)
 
 # TODO разобраться почему не запускается Опера

@@ -1,10 +1,17 @@
+import allure
+
+
+@allure.title('Login pop-up open')
 def test_log_in_pop_up_is_open(driver, main_page):
-    log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
     assert 'Log in' in log_in_pop_up.text_log_in.text
 
 
+@allure.title('Visibility of pop-up elements')
 def test_log_in_pop_up_elements_are_visible(driver, main_page):
-    log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
     assert log_in_pop_up.text_log_in.is_displayed()
     assert log_in_pop_up.button_cross.is_displayed()
     assert log_in_pop_up.field_email.is_displayed()
@@ -15,27 +22,41 @@ def test_log_in_pop_up_elements_are_visible(driver, main_page):
     assert log_in_pop_up.button_login.is_displayed()
 
 
+@allure.feature('Remember me')
 def test_remember_me_button_enable(driver, main_page):
-    log_in_pop_up = main_page.open_log_in_pop_up()
-    log_in_pop_up.remember_me_enable()
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Enable remember me button"):
+        log_in_pop_up.remember_me_enable()
     assert log_in_pop_up.check_box_remember_me.is_displayed()
     assert log_in_pop_up.check_box_remember_me.is_selected()
 
 
+@allure.description('This test is for open registration pop-up')
 def test_registration_button_click(driver, main_page):
-    log_in_pop_up = main_page.open_log_in_pop_up()
-    registration_pop_up = log_in_pop_up.click_registration_button()
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Click registration button"):
+        registration_pop_up = log_in_pop_up.click_registration_button()
     assert 'Registration' in registration_pop_up.text_registration.text
     assert log_in_pop_up.is_element_not_displayed(log_in_pop_up.CHECK_BOX_REMEMBER_ME_LOCATOR)
 
 
+@allure.feature('Restore password')
+@allure.description('This test is for open restore access pop-up')
 def test_forgot_password_button_click(driver, main_page):
-    log_in_pop_up = main_page.open_log_in_pop_up()
-    restore_access_pop_up = log_in_pop_up.click_forgot_password_button()
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Click button Forgot password"):
+        restore_access_pop_up = log_in_pop_up.click_forgot_password_button()
     assert 'Restore access' in restore_access_pop_up.text_restore.text
 
 
+@allure.feature('Login')
+@allure.story('Successful login')
 def test_successful_login(driver, main_page, test_user):
-    log_in_pop_up = main_page.open_log_in_pop_up()
-    garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Fill login form and click Sign In button"):
+        garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
     assert garage_page.garage_name.is_displayed()

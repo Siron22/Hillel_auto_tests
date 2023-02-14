@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from ui_web_tests.pages.base_page import BasePage
@@ -5,7 +6,6 @@ from ui_web_tests.pages.user_profile.garage_page import GaragePage
 
 
 class RegistrationPopUp(BasePage):
-
     TEXT_REGISTRATION_LOCATOR = (By.CSS_SELECTOR, '.modal-title')
     BUTTON_CROSS_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
     FIELD_NAME_LOCATOR = (By.ID, 'signupName')
@@ -14,7 +14,6 @@ class RegistrationPopUp(BasePage):
     FIELD_PASSWORD_LOCATOR = (By.ID, 'signupPassword')
     FIELD_REENTER_PASSWORD_LOCATOR = (By.ID, 'signupRepeatPassword')
     BUTTON_REGISTER_LOCATOR = (By.CSS_SELECTOR, 'button.btn:nth-child(1)')
-
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
@@ -51,25 +50,27 @@ class RegistrationPopUp(BasePage):
     def button_register(self):
         return self.element(RegistrationPopUp.BUTTON_REGISTER_LOCATOR)
 
-    def go_to_page(self):
-        self.navigate_to_main()
-        self.click_sign_up_button()
-
+    @allure.step('Enter name {name}')
     def enter_name(self, name):
         self.field_name.send_keys(name)
 
+    @allure.step('Enter email {email}')
     def enter_email(self, email):
         self.field_email.send_keys(email)
 
+    @allure.step('Enter lastname {lastname}')
     def enter_last_name(self, last_name):
         self.field_last_name.send_keys(last_name)
 
+    @allure.step('Enter password {password}')
     def enter_password(self, password):
         self.field_password.send_keys(password)
 
+    @allure.step('Renter password {password}')
     def reenter_password(self, password):
         self.field_reenter_password.send_keys(password)
 
+    @allure.step('Click registration button')
     def click_registration_button(self):
         self.button_register.click()
 
@@ -85,11 +86,3 @@ class RegistrationPopUp(BasePage):
         self._fill_registration_form_and_click_register_button(name, lastname, email, password)
         garage_page = GaragePage(self.driver)
         return garage_page
-
-    
-
-
-
-
-
-
