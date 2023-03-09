@@ -1,8 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from ui_web_tests.pages.base_page import BasePage
-from ui_web_tests.pages.log_in_pop_up import LoginPopUp
-from ui_web_tests.pages.registration_pop_up import RegistrationPopUp
+from ui_web_tests.pages.main_page_elements.log_in_pop_up import LoginPopUp
+from ui_web_tests.pages.main_page_elements.registration_pop_up import RegistrationPopUp
 
 
 class MainPage(BasePage):
