@@ -59,4 +59,4 @@ def test_successful_login(driver, main_page, test_user):
         log_in_pop_up = main_page.open_log_in_pop_up()
     with allure.step("Fill login form and click Sign In button"):
         garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
-    assert garage_page.garage_name.is_displayed()
+    assert garage_page.page_title.is_displayed()

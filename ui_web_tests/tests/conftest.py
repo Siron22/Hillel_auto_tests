@@ -9,7 +9,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from ui_web_tests.utilities.browsers import Browser
 from ui_web_tests.utilities.useful_func import get_browser_name, get_screenshot_directory
 from ui_web_tests.utilities.project_exceptions import UnsupportedBrowserError
-from ui_web_tests.pages.main_page import MainPage
+from ui_web_tests.pages.main_page_elements.main_page import MainPage
 from ui_web_tests.utilities.user import User
 
 
@@ -31,8 +31,6 @@ def driver(browser_name):
     yield driver
     driver.quit()
 
-
-@allure.step('Prepare user`s data')
 @pytest.fixture(scope='session')
 def test_user():
     return User("Pierce", "Nicolas", "Shany.Windler@gmail.com", "Wednesday1XxXx")
@@ -44,6 +42,12 @@ def main_page(driver):
     main_page.navigate_to_main()
     return main_page
 
+@allure.step('Test user authorization')
+@pytest.fixture()
+def authorization(main_page, test_user):
+    log_in_pop_up = main_page.open_log_in_pop_up()
+    garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
+    return garage_page
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument

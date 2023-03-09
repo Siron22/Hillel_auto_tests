@@ -29,7 +29,7 @@ def test_successful_registration(driver, main_page, test_user):
     with allure.step("Fill login form and click registration button"):
         garage_page = registration_pop_up.successful_registration(test_user.name, test_user.lastname,
                                                                   test_user.email, test_user.password)
-    assert garage_page.garage_name.is_displayed()
+    assert garage_page.page_title.is_displayed()
 
 # TODO:
 #  - tests for incorrect values;
