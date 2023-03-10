@@ -1,3 +1,4 @@
+import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -40,12 +41,15 @@ class RemoveAccountPopUp(BasePage):
     def text_danger(self):
         return self.element(RemoveAccountPopUp.TEXT_DANGER_LOCATOR)
 
+    @allure.step('Click "Remove" button')
     def click_remove_button(self):
         #self.button_remove.click()
         webdriver.ActionChains(self.driver).move_to_element(self.button_remove).click(self.button_remove).perform()
 
+    @allure.step('Click "Close" button')
     def click_close_button(self):
         self.button_close.click()
 
+    @allure.step('Click "Cancel" button')
     def click_cancel_button(self):
         self.button_cancel.click()

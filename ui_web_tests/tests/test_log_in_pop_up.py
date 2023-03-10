@@ -7,6 +7,13 @@ def test_log_in_pop_up_is_open(driver, main_page):
         log_in_pop_up = main_page.open_log_in_pop_up()
     assert 'Log in' in log_in_pop_up.text_log_in.text
 
+@allure.title('Login pop-up close')
+def test_log_in_pop_up_close(driver, main_page):
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
+    log_in_pop_up.click_close_button()
+    main_page.logo_hillel_auto.is_displayed()
+    assert log_in_pop_up.is_element_not_displayed(log_in_pop_up.TEXT_LOG_IN_LOCATOR)
 
 @allure.title('Visibility of pop-up elements')
 def test_log_in_pop_up_elements_are_visible(driver, main_page):
