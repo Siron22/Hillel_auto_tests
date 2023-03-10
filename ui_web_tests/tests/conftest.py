@@ -6,6 +6,8 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
+
+from ui_web_tests.pages.navigation_elements.sidebar import Sidebar
 from ui_web_tests.utilities.browsers import Browser
 from ui_web_tests.utilities.useful_func import get_browser_name, get_screenshot_directory
 from ui_web_tests.utilities.project_exceptions import UnsupportedBrowserError
@@ -33,7 +35,11 @@ def driver(browser_name):
 
 @pytest.fixture(scope='session')
 def test_user():
-    return User("Pierce", "Nicolas", "Shany.Windler@gmail.com", "Wednesday1XxXx")
+    return User('Pierce', 'Nicolass', 'Shany.Windler@gmail.com', 'Wednesday1XxXx')
+
+@pytest.fixture(scope='session')
+def test_user2():
+    return User('Andreas', 'Niolass', 'Sha.Windl@gmail.com', 'Wednesday5XxXx')
 
 @allure.step('Navigate to main page')
 @pytest.fixture()
@@ -49,6 +55,13 @@ def authorization(main_page, test_user):
     garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
     return garage_page
 
+@pytest.fixture()
+def remove_user(driver):
+    settings = Sidebar(driver).open_settings_page()
+    settings.click_remove_my_account()
+
+
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument
     # execute all other hooks to obtain the report object
@@ -63,5 +76,10 @@ def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument
         file_path = os.path.join(get_screenshot_directory(), file_name)
         driver.save_screenshot(file_path)
         allure.attach.file(file_path, name='Test failed screen', attachment_type=allure.attachment_type.PNG)
+
+
+
+
+
 
 # TODO разобраться почему не запускается Опера

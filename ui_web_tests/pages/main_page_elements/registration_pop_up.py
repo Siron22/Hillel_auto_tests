@@ -9,11 +9,12 @@ class RegistrationPopUp(BasePage):
     TEXT_REGISTRATION_LOCATOR = (By.CSS_SELECTOR, '.modal-title')
     BUTTON_CROSS_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
     FIELD_NAME_LOCATOR = (By.ID, 'signupName')
-    FIELD_LAST_NAME_LOCATOR = (By.ID, 'signupLastName')
+    FIELD_LAST_NAME_LOCATOR = (By.CSS_SELECTOR, '#signupLastName')
     FIELD_EMAIL_LOCATOR = (By.ID, 'signupEmail')
     FIELD_PASSWORD_LOCATOR = (By.ID, 'signupPassword')
     FIELD_REENTER_PASSWORD_LOCATOR = (By.ID, 'signupRepeatPassword')
     BUTTON_REGISTER_LOCATOR = (By.CSS_SELECTOR, 'button.btn:nth-child(1)')
+    BUTTON_CLOSE_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
@@ -50,6 +51,10 @@ class RegistrationPopUp(BasePage):
     def button_register(self):
         return self.element(RegistrationPopUp.BUTTON_REGISTER_LOCATOR)
 
+    @property
+    def button_close(self):
+        return self.element(RegistrationPopUp.BUTTON_CLOSE_LOCATOR)
+
     @allure.step('Enter name {name}')
     def enter_name(self, name):
         self.field_name.send_keys(name)
@@ -59,8 +64,8 @@ class RegistrationPopUp(BasePage):
         self.field_email.send_keys(email)
 
     @allure.step('Enter lastname {lastname}')
-    def enter_last_name(self, last_name):
-        self.field_last_name.send_keys(last_name)
+    def enter_last_name(self, lastname):
+        self.field_last_name.send_keys(lastname)
 
     @allure.step('Enter password {password}')
     def enter_password(self, password):
@@ -85,4 +90,9 @@ class RegistrationPopUp(BasePage):
     def successful_registration(self, name, lastname, email, password):
         self._fill_registration_form_and_click_register_button(name, lastname, email, password)
         garage_page = GaragePage(self.driver)
+        garage_page.page_title.is_displayed()
         return garage_page
+
+    @allure.step('Click "Close" button')
+    def click_close_button(self):
+        self.button_close.click()
