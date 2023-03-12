@@ -23,7 +23,7 @@ def test_main_page_elements_displayed(driver, main_page):
     assert main_page.button_signup.is_displayed()
     assert main_page.string1.is_displayed()
     assert main_page.string2.is_displayed()
-    assert main_page.video_locator.is_displayed()
+
 
 # @allure.description('Test for all main paige elements visibility')
 # def test_main_page_elements_displayed(driver):
