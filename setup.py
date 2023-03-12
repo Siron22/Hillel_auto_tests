@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-setup(name='hillel_auto_selenium_test',
+setup(name='Hillel_auto__tests',
       version='1.0',
       description='Sample testing project',
       packages=['ui_web_tests'],

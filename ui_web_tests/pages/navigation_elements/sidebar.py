@@ -78,4 +78,6 @@ class Sidebar(BasePage):
     @allure.step('Click Log out button')
     def click_log_out(self):
         self.button_log_out.click()
-        return MainPage(self.driver)
+        main_page = MainPage(self.driver)
+        main_page.logo_hillel_auto.is_displayed()
+        return main_page

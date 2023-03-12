@@ -41,7 +41,7 @@ def test_user():
 def test_user2():
     return User('Andreas', 'Niolass', 'Sha.Windl@gmail.com', 'Wednesday5XxXx')
 
-@allure.step('Navigate to main page')
+
 @pytest.fixture()
 def main_page(driver):
     main_page = MainPage(driver)
@@ -81,5 +81,3 @@ def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument
 
 
 
-
-# TODO разобраться почему не запускается Опера

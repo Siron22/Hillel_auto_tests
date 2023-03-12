@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,6 +14,7 @@ class BasePage(object):
         # return self.driver.find_element(*locator)
         return WebDriverWait(self.driver, timeout=timeout).until(EC.visibility_of_element_located(locator))
 
+    #@allure.step('Navigate to main page')
     def navigate_to_main(self):
         self.driver.get(get_base_url())
 
