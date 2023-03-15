@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from ui_web_tests.pages.main_page_elements.registration_pop_up import RegistrationPopUp
 from ui_web_tests.pages.main_page_elements.restore_access_pop_up import RestoreAccessPopUp
-from ui_web_tests.pages.user_profile.garage_page import GaragePage
+from ui_web_tests.pages.profile_pages.garage_page import GaragePage
 from ui_web_tests.pages.base_page import BasePage
 
 

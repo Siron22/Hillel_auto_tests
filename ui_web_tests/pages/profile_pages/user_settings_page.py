@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from ui_web_tests.pages.base_page import BasePage
-from ui_web_tests.pages.user_profile.remove_account_pop_up import RemoveAccountPopUp
+from ui_web_tests.pages.profile_pages.remove_account_pop_up import RemoveAccountPopUp
 
 
 class SettingsPage(BasePage):

@@ -4,6 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from ui_web_tests.pages.base_page import BasePage
 from ui_web_tests.pages.main_page_elements.log_in_pop_up import LoginPopUp
 from ui_web_tests.pages.main_page_elements.registration_pop_up import RegistrationPopUp
+from ui_web_tests.pages.profile_pages.garage_page import GaragePage
 
 
 class MainPage(BasePage):
@@ -103,8 +104,15 @@ class MainPage(BasePage):
         return self.element(MainPage.STRING2_LOCATOR)
 
     @property
-    def video_locator(self):
+    def video(self):
+        self.driver.switch_to.frame(self.driver.find_element(By.TAG_NAME, "iframe"))
         return self.element(MainPage.VIDEO_LOCATOR)
+
+    @allure.step('Click button "Guest log in"')
+    def click_button_guest_login(self):
+        self.button_guest_login.click()
+        garage = GaragePage(self.driver)
+        return garage
 
     @allure.step('Open Log in pop-up')
     def open_log_in_pop_up(self):

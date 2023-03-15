@@ -60,6 +60,9 @@ def remove_user(driver):
     settings = Sidebar(driver).open_settings_page()
     settings.click_remove_my_account()
 
+@pytest.fixture()
+def sidebar(driver):
+    return Sidebar(driver)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
