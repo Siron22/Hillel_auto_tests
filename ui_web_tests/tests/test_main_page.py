@@ -93,13 +93,9 @@ def test_main_page_click_about(driver, main_page):
     print('Email location: ',main_page.link_email.location)
     print('Link email: ',driver.execute_script("return arguments[0].getBoundingClientRect();", main_page.link_email))  # {'bottom': 701.09375, 'height': 19, 'left': 1356.671875, 'right': 1506.5, 'toJSON': {}, 'top': 682.09375, 'width': 149.828125, 'x': 1356.671875, 'y': 682.09375}
 
-
-
 # @allure.title('Click button "Home"')
 # def test_main_page_click_home(driver, main_page):
 #     main_page.click_button_home
-#
-#
 #
 # @allure.title('Click button "Contacts"')
 # def test_main_page_click_contacts(driver, main_page):
