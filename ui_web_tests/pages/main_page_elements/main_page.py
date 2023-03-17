@@ -27,9 +27,14 @@ class MainPage(BasePage):
     ICON_LINKEDIN_LOCATOR = (By.CSS_SELECTOR, '.icon-linkedin')
     LINK_HILLEL_LOCATOR = (By.CSS_SELECTOR, 'a.contacts_link:nth-child(1)')
     LINK_EMAIL_LOCATOR = (By.CSS_SELECTOR, 'a.contacts_link:nth-child(2)')
+    MOVIE_PLAYER_LOCATOR = (By.ID, 'movie_player')
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
+
+    @property
+    def movie_player(self):
+        return self.element(MainPage.MOVIE_PLAYER_LOCATOR)
 
     @property
     def logo_hillel_auto(self):
@@ -166,9 +171,13 @@ class MainPage(BasePage):
     def click_link_email(self):
         self.link_email.click()
 
+    @allure.step('Launch video')
+    def click_link_email(self):
+        self.video.click()
 
-
-
+    @allure.step('Pause video')
+    def click_link_email(self):
+        self.movie_player.click()
 
 
 
