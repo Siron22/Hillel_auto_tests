@@ -1,4 +1,7 @@
 import allure
+import pytest
+from pytest_check import check
+from ui_web_tests.utilities.user import User
 
 
 @allure.title('Login pop-up open')
@@ -73,12 +76,60 @@ def test_successful_login(driver, main_page, test_user):
 
 @allure.feature('Login')
 @allure.description('Test for all empty fields')
-def test_successful_login(driver, main_page):
+def test_unsuccessful_login_empty_fields(driver, main_page):
     with allure.step("Click Sign In button"):
         log_in_pop_up = main_page.open_log_in_pop_up()
-    with allure.step("Click Sign In button with empty fields"):
-        log_in_pop_up.click_login_button()
+    with allure.step("Click email field"):
+        log_in_pop_up.field_email.click()
+    with allure.step("Click password field"):
+        log_in_pop_up.field_password.click()
+    with allure.step("Click remember me button"):
+        log_in_pop_up.remember_me_enable()
+    assert log_in_pop_up.button_login.is_enabled() == False
     assert log_in_pop_up.email_error_marker.is_displayed()
     assert log_in_pop_up.password_error_marker.is_displayed()
-    assert log_in_pop_up.email_error_marker.text == "Email required"
-    assert log_in_pop_up.password_error_marker.text == "Password required"
+    check.equal(log_in_pop_up.email_error_marker.text, "Email required")
+    check.equal(log_in_pop_up.password_error_marker.text, "Password required")
+
+
+@allure.feature('Login')
+@allure.description('Test for incorrect email')
+@pytest.mark.parametrize('email, password', User.INVALID_EMAIL_DATA)
+def test_unsuccessful_login_incorrect_email(driver, main_page, email, password):
+    log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Enter incorrect data in email field"):
+        log_in_pop_up.enter_email(email)
+    with allure.step("Enter random value in password field"):
+        log_in_pop_up.enter_password(password)
+    check.equal(log_in_pop_up.button_login.is_enabled(), False)
+    assert log_in_pop_up.email_error_marker.text == "Email is incorrect"
+    assert log_in_pop_up.email_error_marker.is_displayed()
+    assert log_in_pop_up.is_element_not_displayed(log_in_pop_up.PASSWORD_ERROR_MARKER_LOCATOR)
+
+
+@allure.feature('Login')
+@allure.description('Test for incorrect password')
+def test_unsuccessful_login_incorrect_password(driver, main_page, test_user):
+    log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Enter correct data in email field"):
+        log_in_pop_up.enter_email(test_user.email)
+    with allure.step("Enter incorrect value in password field"):
+        log_in_pop_up.enter_password(User.INCORRECT_PASSWORD)
+    check.equal(log_in_pop_up.button_login.is_enabled(), True)
+    log_in_pop_up.click_login_button()
+    assert log_in_pop_up.alert_wrong_email_or_password.is_displayed()
+    assert log_in_pop_up.alert_wrong_email_or_password.text == 'Wrong email or password'
+
+@allure.feature('Login')
+@allure.description('Test for unregistered user')
+def test_unsuccessful_login_unregistered_user(driver, main_page):
+    log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Enter  in email field unregistered email"):
+        log_in_pop_up.enter_email(User.UNREGISTERED_EMAIL)
+    with allure.step("Enter incorrect value in password field"):
+        log_in_pop_up.enter_password(User.INCORRECT_PASSWORD)
+    check.equal(log_in_pop_up.button_login.is_enabled(), True)
+    log_in_pop_up.click_login_button()
+    assert log_in_pop_up.alert_wrong_email_or_password.is_displayed()
+    assert log_in_pop_up.alert_wrong_email_or_password.text == 'Wrong email or password'
+

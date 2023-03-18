@@ -19,10 +19,14 @@ class LoginPopUp(BasePage):
     BUTTON_CLOSE_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
     EMAIL_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signinEmail']/following-sibling::div/p")
     PASSWORD_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signinPassword']/following-sibling::div/p")
-
+    ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR = (By.CSS_SELECTOR, '.alert-danger')
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
+
+    @property
+    def alert_wrong_email_or_password(self):
+        return self.element(LoginPopUp.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR)
 
     @property
     def email_error_marker(self):
