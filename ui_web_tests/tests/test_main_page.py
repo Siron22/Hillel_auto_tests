@@ -1,5 +1,4 @@
 import allure
-import pytest
 from selenium.webdriver.common.by import By
 import time
 
@@ -22,6 +21,14 @@ def test_main_page_elements_displayed(driver, main_page):
     assert main_page.button_signup.is_displayed()
     assert main_page.string1.is_displayed()
     assert main_page.string2.is_displayed()
+
+
+@allure.description('Test for texts on main page')
+def test_main_page_text_on_main(driver, main_page):
+    assert main_page.string1.text == "Do more!"
+    assert main_page.string2.text == "With the help of the Hillel auto project, you will have the opportunity " \
+                                     "to get hands-on experience in manual testing."
+
 
 
 @allure.title('Test for main page video')
@@ -118,7 +125,7 @@ def test_main_page_click_about(driver, main_page):
 #
 # @allure.title('Click button "Contacts"')
 # def test_main_page_click_contacts(driver, main_page):
-#     main_page.click_button_contacts
+#     main_page.click_button_contact
 
-# TODO: Make launch video test
+
 

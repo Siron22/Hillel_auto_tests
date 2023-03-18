@@ -61,10 +61,24 @@ def test_forgot_password_button_click(driver, main_page):
 
 
 @allure.feature('Login')
-@allure.story('Successful login')
+@allure.description('Successful login')
 def test_successful_login(driver, main_page, test_user):
     with allure.step("Click Sign In button"):
         log_in_pop_up = main_page.open_log_in_pop_up()
     with allure.step("Fill login form and click Sign In button"):
         garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
     assert garage_page.page_title.is_displayed()
+
+"""Negative tests"""
+
+@allure.feature('Login')
+@allure.description('Test for all empty fields')
+def test_successful_login(driver, main_page):
+    with allure.step("Click Sign In button"):
+        log_in_pop_up = main_page.open_log_in_pop_up()
+    with allure.step("Click Sign In button with empty fields"):
+        log_in_pop_up.click_login_button()
+    assert log_in_pop_up.email_error_marker.is_displayed()
+    assert log_in_pop_up.password_error_marker.is_displayed()
+    assert log_in_pop_up.email_error_marker.text == "Email required"
+    assert log_in_pop_up.password_error_marker.text == "Password required"

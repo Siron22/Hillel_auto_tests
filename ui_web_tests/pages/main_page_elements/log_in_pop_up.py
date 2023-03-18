@@ -17,9 +17,20 @@ class LoginPopUp(BasePage):
     BUTTON_REGISTRATION_LOCATOR = (By.CSS_SELECTOR, 'button.btn:nth-child(1)')
     BUTTON_LOGIN_LOCATOR = (By.CSS_SELECTOR, 'button.btn-primary:nth-child(2)')
     BUTTON_CLOSE_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
+    EMAIL_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signinEmail']/following-sibling::div/p")
+    PASSWORD_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signinPassword']/following-sibling::div/p")
+
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
+
+    @property
+    def email_error_marker(self):
+        return self.element(LoginPopUp.EMAIL_ERROR_MARKER_LOCATOR)
+
+    @property
+    def password_error_marker(self):
+        return self.element(LoginPopUp.PASSWORD_ERROR_MARKER_LOCATOR)
 
     @property
     def text_log_in(self):
