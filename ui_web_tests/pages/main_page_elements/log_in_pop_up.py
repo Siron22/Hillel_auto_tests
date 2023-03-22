@@ -9,7 +9,6 @@ from ui_web_tests.pages.base_page import BasePage
 
 class LoginPopUp(BasePage):
     TEXT_LOG_IN_LOCATOR = (By.CSS_SELECTOR, '.modal-title')
-    BUTTON_CROSS_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
     FIELD_EMAIL_LOCATOR = (By.ID, 'signinEmail')
     FIELD_PASSWORD_LOCATOR = (By.ID, 'signinPassword')
     CHECK_BOX_REMEMBER_ME_LOCATOR = (By.ID, 'remember')
@@ -39,10 +38,6 @@ class LoginPopUp(BasePage):
     @property
     def text_log_in(self):
         return self.element(LoginPopUp.TEXT_LOG_IN_LOCATOR)
-
-    @property
-    def button_cross(self):
-        return self.element(LoginPopUp.BUTTON_CROSS_LOCATOR)
 
     @property
     def field_email(self):

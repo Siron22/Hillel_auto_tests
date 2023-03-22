@@ -14,8 +14,8 @@ def test_sidebar_elements_visibility(main_page, sidebar):
 @allure.title('Sidebar guest profile: elements for user profile are absent')
 def test_sidebar_elements_visibility(main_page, sidebar):
     main_page.click_button_guest_login()
-    assert sidebar.is_element_not_displayed(sidebar.BUTTON_PROFILE_LOCATOR)
-    assert sidebar.is_element_not_displayed(sidebar.BUTTON_SETTINGS_LOCATOR)
+    assert sidebar.element_is_not_visible(sidebar.BUTTON_PROFILE_LOCATOR)
+    assert sidebar.element_is_not_visible(sidebar.BUTTON_SETTINGS_LOCATOR)
 
 @allure.title('Sidebar guest profile: Navigate to Fuel expenses')
 def test_navigate_to_fuel_expenses(main_page, sidebar):

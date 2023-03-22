@@ -1,0 +1,15 @@
+class Alerts:
+    EMAIL_REQUIRED = "Email required"
+    PASSWORD_REQUIRED = "Password required"
+    RE_ENTER_PASSWORD_REQUIRED = "Re-enter password required"
+    EMAIL_IS_INCORRECT = "Email is incorrect"
+    WRONG_EMAIL_OR_PASSWORD = "Wrong email or password"
+    USER_ALREADY_EXISTS = "User already exists"
+    NAME_REQUIRED = "Name required"
+    LAST_NAME_REQUIRED = "Last name required"
+    NAME_IS_INVALID = "Name is invalid"
+    LAST_NAME_IS_INVALID = "Last name is invalid"
+    PASS_HAVE_TO = "Password has to be from 8 to 15 characters " \
+                   "long and contain at least one integer, one capital, and one small letter"
+    NAME_HAS_TO = "Name has to be from 2 to 20 characters long"
+    LAST_NAME_HAS_TO = "Last name has to be from 2 to 20 characters long"

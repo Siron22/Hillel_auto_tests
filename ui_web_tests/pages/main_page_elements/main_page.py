@@ -116,20 +116,17 @@ class MainPage(BasePage):
     @allure.step('Click button "Guest log in"')
     def click_button_guest_login(self):
         self.button_guest_login.click()
-        garage = GaragePage(self.driver)
-        return garage
+        return GaragePage(self.driver)
 
-    @allure.step('Open Log in pop-up')
+    @allure.step('Click Sign in button')
     def open_log_in_pop_up(self):
         self.button_signin.click()
-        log_in_pop_up = LoginPopUp(self.driver)
-        return log_in_pop_up
+        return LoginPopUp(self.driver)
 
-    @allure.step('Open Registration pop-up')
+    @allure.step('Click Sign up button')
     def open_registration_pop_up(self):
         self.button_signup.click()
-        registration_pop_up = RegistrationPopUp(self.driver)
-        return registration_pop_up
+        return RegistrationPopUp(self.driver)
 
     @allure.step('Click button "Home')
     def click_button_home(self):

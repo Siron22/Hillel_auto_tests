@@ -34,11 +34,11 @@ def driver(browser_name):
     driver.quit()
 
 @pytest.fixture(scope='session')
-def test_user():
+def registered_user():
     return User('Pierce', 'Nicolass', 'Shany.Windler@gmail.com', 'Wednesday1XxXx')
 
 @pytest.fixture(scope='session')
-def test_user2():
+def unregistered_user():
     return User('Andreas', 'Niolass', 'Sha.Windl@gmail.com', 'Wednesday5XxXx')
 
 
@@ -50,9 +50,9 @@ def main_page(driver):
 
 @allure.step('Test user authorization')
 @pytest.fixture()
-def authorization(main_page, test_user):
+def authorization(main_page, registered_user):
     log_in_pop_up = main_page.open_log_in_pop_up()
-    garage_page = log_in_pop_up.successful_login(test_user.email, test_user.password)
+    garage_page = log_in_pop_up.successful_login(registered_user.email, registered_user.password)
     return garage_page
 
 @pytest.fixture()
@@ -72,7 +72,6 @@ def pytest_runtest_makereport(item, call):  # pylint: disable=unused-argument
     rep = outcome.get_result()
     # we only look at actual failing test calls, not setup/teardown
     if rep.when == "call" and rep.failed:
-
         driver = item.funcargs["driver"]
         import datetime
         file_name = f"{item.name}_{datetime.datetime.now().strftime('%Y_%m_%d-%H_%M')}.png"

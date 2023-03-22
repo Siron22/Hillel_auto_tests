@@ -7,7 +7,6 @@ from ui_web_tests.pages.profile_pages.garage_page import GaragePage
 
 class RegistrationPopUp(BasePage):
     TEXT_REGISTRATION_LOCATOR = (By.CSS_SELECTOR, '.modal-title')
-    BUTTON_CROSS_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
     FIELD_NAME_LOCATOR = (By.ID, 'signupName')
     FIELD_LAST_NAME_LOCATOR = (By.CSS_SELECTOR, '#signupLastName')
     FIELD_EMAIL_LOCATOR = (By.ID, 'signupEmail')
@@ -15,17 +14,38 @@ class RegistrationPopUp(BasePage):
     FIELD_REENTER_PASSWORD_LOCATOR = (By.ID, 'signupRepeatPassword')
     BUTTON_REGISTER_LOCATOR = (By.CSS_SELECTOR, 'button.btn:nth-child(1)')
     BUTTON_CLOSE_LOCATOR = (By.CSS_SELECTOR, '.close > span:nth-child(1)')
+    NAME_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupName']/following-sibling::div/p")
+    LAST_NAME_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupLastName']/following-sibling::div/p")
+    EMAIL_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupEmail']/following-sibling::div/p")
+    PASSWORD_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupPassword']/following-sibling::div/p")
+    RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupRepeatPassword']/following-sibling::div/p")
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
 
     @property
-    def text_registration(self):
-        return self.element(RegistrationPopUp.TEXT_REGISTRATION_LOCATOR)
+    def name_error_marker(self):
+        return self.element(RegistrationPopUp.NAME_ERROR_MARKER_LOCATOR)
 
     @property
-    def button_cross(self):
-        return self.element(RegistrationPopUp.BUTTON_CROSS_LOCATOR)
+    def last_name_error_marker(self):
+        return self.element(RegistrationPopUp.LAST_NAME_ERROR_MARKER_LOCATOR)
+
+    @property
+    def email_error_marker(self):
+        return self.element(RegistrationPopUp.EMAIL_ERROR_MARKER_LOCATOR)
+
+    @property
+    def password_error_marker(self):
+        return self.element(RegistrationPopUp.PASSWORD_ERROR_MARKER_LOCATOR)
+
+    @property
+    def re_enter_password_error_marker(self):
+        return self.element(RegistrationPopUp.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR)
+
+    @property
+    def text_registration(self):
+        return self.element(RegistrationPopUp.TEXT_REGISTRATION_LOCATOR)
 
     @property
     def field_email(self):

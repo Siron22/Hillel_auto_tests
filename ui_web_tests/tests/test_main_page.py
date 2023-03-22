@@ -1,4 +1,5 @@
 import allure
+from pytest_check import check
 from selenium.webdriver.common.by import By
 import time
 
@@ -12,15 +13,15 @@ def test_main_page_is_open(driver, main_page):
 
 @allure.description('Test for all main paige elements visibility')
 def test_main_page_elements_displayed(driver, main_page):
-    assert main_page.logo_hillel_auto.is_displayed()
-    assert main_page.button_home.is_displayed()
-    assert main_page.button_about.is_displayed()
-    assert main_page.button_contacts.is_displayed()
-    assert main_page.button_guest_login.is_displayed()
-    assert main_page.button_signin.is_displayed()
-    assert main_page.button_signup.is_displayed()
-    assert main_page.string1.is_displayed()
-    assert main_page.string2.is_displayed()
+    check.is_true(main_page.element_is_visible(main_page.LOGO_HILLEL_AUTO_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.BUTTON_HOME_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.BUTTON_ABOUT_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.BUTTON_CONTACTS_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.BUTTON_SIGNIN_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.BUTTON_SIGNUP_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.BUTTON_GUEST_LOGIN_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.STRING1_LOCATOR))
+    check.is_true(main_page.element_is_visible(main_page.STRING2_LOCATOR))
 
 
 @allure.description('Test for texts on main page')
@@ -33,7 +34,7 @@ def test_main_page_text_on_main(driver, main_page):
 
 @allure.title('Test for main page video')
 def test_main_page_video_displayed(driver, main_page):
-    assert main_page.video.is_displayed()
+    assert main_page.element_is_visible(main_page.VIDEO_LOCATOR)
 
 
 @allure.title('Test for main page facebook link')
@@ -78,12 +79,14 @@ def test_main_page_linkedin_link_is_open(driver, main_page):
 @allure.title('Test movie player is ready to use')
 def test_main_page_movie_player_is_ready(driver, main_page):
     main_page.video.click()
+    """This parameter is taking directly after button "Play" click and before 
+    the video starts to play"""
     player_mode = main_page.movie_player.get_attribute("class")
     assert 'unstarted-mode' in player_mode
 
 
 @allure.title('Test video is playing')
-def test_main_page_movie_player_is_launche(driver, main_page):
+def test_main_page_movie_player_is_launch(driver, main_page):
     main_page.video.click()
     time.sleep(1)
     player_mode = main_page.movie_player.get_attribute("class")
@@ -91,7 +94,7 @@ def test_main_page_movie_player_is_launche(driver, main_page):
 
 
 @allure.title('Test video is paused')
-def test_main_page_movie_player_is_ready(driver, main_page):
+def test_main_page_movie_player_is_paused(driver, main_page):
     main_page.video.click()
     time.sleep(1)
     main_page.movie_player.click()
@@ -104,7 +107,7 @@ def test_main_page_movie_player_is_ready(driver, main_page):
 @allure.title('Scroll the page')
 def test_main_page_scroll_to_end(driver, main_page):
     driver.execute_script("window.scrollBy(0,document.body.scrollHeight)")
-    time.sleep(2)
+    time.sleep(1)
 
 @allure.title('Scroll the page')
 def test_main_page_click_about(driver, main_page):
