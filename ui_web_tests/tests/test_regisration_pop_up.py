@@ -2,6 +2,8 @@ import time
 import allure
 import pytest
 from pytest_check import check
+from selenium.webdriver.common.by import By
+
 from ui_web_tests.utilities.alerts import Alerts
 from ui_web_tests.utilities.user import UserTestData
 
@@ -90,15 +92,25 @@ def test_unsuccessful_registration_incorrect_value_name(driver, main_page, name)
         registration_pop_up.enter_name(name)
     with allure.step('Click on other field'):
         registration_pop_up.field_password.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_IS_INVALID)
-    check.is_in('is-invalid', registration_pop_up.field_name.get_attribute("class"))
+    length = len(name)
+    if 2 <= length <= 20 :
+        check.is_true(registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR))
+        if registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR):
+            check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_IS_INVALID)
+        check.is_in('is-invalid', registration_pop_up.field_name.get_attribute("class"))
+    else:
+        markers = driver.find_elements(By.XPATH, "//input[@id='signupName']/following-sibling::div/p")
+        alerts = []
+        for m in markers:
+            alerts.append(m.text)
+        check.is_in(Alerts.NAME_IS_INVALID, alerts)
+        check.is_in(Alerts.NAME_HAS_TO, alerts)
+        check.is_in('is-invalid', registration_pop_up.field_name.get_attribute("class"))
 
 
 @allure.feature('Registration')
 @allure.description('Test for incorrect length of name')
-@pytest.mark.parametrize('name', UserTestData.INCORRECT_NAME_DATA)
+@pytest.mark.parametrize('name', UserTestData.INCORRECT_LENGTH_DATA)
 def test_unsuccessful_registration_incorrect_length_name(driver, main_page, name):
     registration_pop_up = main_page.open_registration_pop_up()
     with allure.step('Enter incorrect data in "Name" field'):
@@ -107,23 +119,76 @@ def test_unsuccessful_registration_incorrect_length_name(driver, main_page, name
         registration_pop_up.field_password.click()
     check.is_true(registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR))
     if registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_IS_INVALID)
+        check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_HAS_TO)
     check.is_in('is-invalid', registration_pop_up.field_name.get_attribute("class"))
 
 
 @allure.feature('Registration')
-@allure.description('Test for incorrect last name value: сyrillic symbols, numbers, special symbols, name with space')
+@allure.description('Test for trim function in "Name" field')
+@pytest.mark.parametrize('name', UserTestData.TRIM_DATA)
+def test_unsuccessful_registration_incorrect_trim_in_name(driver, main_page, name):
+    registration_pop_up = main_page.open_registration_pop_up()
+    with allure.step('Enter correct data with space in "Name" field'):
+        registration_pop_up.enter_name(name)
+    with allure.step('Click on other field'):
+        registration_pop_up.field_password.click()
+    check.is_false(registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR))
+    check.is_in('ng-valid', registration_pop_up.field_name.get_attribute("class"))
+
+
+@allure.feature('Registration')
+@allure.description('Test for incorrect last name value and length: 1 invalid symbol, 21 symbol including invalids, '
+                    'сyrillic symbols, numbers, special symbols, name with space')
 @pytest.mark.parametrize('last_name', UserTestData.INCORRECT_NAME_DATA)
-def test_unsuccessful_registration_incorrect_last_name(driver, main_page, last_name):
+def test_unsuccessful_registration_incorrect_value_last_name(driver, main_page, last_name):
     registration_pop_up = main_page.open_registration_pop_up()
     with allure.step('Enter incorrect data in "Last name" field'):
         registration_pop_up.enter_last_name(last_name)
-    with allure.step("Click on other field"):
+    with allure.step('Click on other field'):
+        registration_pop_up.field_password.click()
+    length = len(last_name)
+    if 2 <= length <= 20 :
+        check.is_true(registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR))
+        if registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR):
+            check.equal(registration_pop_up.last_name_error_marker.text, Alerts.LAST_NAME_IS_INVALID)
+        check.is_in('is-invalid', registration_pop_up.field_last_name.get_attribute("class"))
+    else:
+        """Tests for both error markers"""
+        markers = driver.find_elements(By.XPATH, "//input[@id='signupLastName']/following-sibling::div/p")
+        alerts = []
+        for m in markers:
+            alerts.append(m.text)
+        check.is_in(Alerts.LAST_NAME_IS_INVALID, alerts)
+        check.is_in(Alerts.LAST_NAME_HAS_TO, alerts)
+        check.is_in('is-invalid', registration_pop_up.field_last_name.get_attribute("class"))
+
+
+@allure.feature('Registration')
+@allure.description('Test for incorrect length of last name')
+@pytest.mark.parametrize('last_name', UserTestData.INCORRECT_LENGTH_DATA)
+def test_unsuccessful_registration_incorrect_length_last_name(driver, main_page, last_name):
+    registration_pop_up = main_page.open_registration_pop_up()
+    with allure.step('Enter incorrect data in "Last name" field'):
+        registration_pop_up.enter_last_name(last_name)
+    with allure.step('Click on other field'):
         registration_pop_up.field_password.click()
     check.is_true(registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.EMAIL_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.email_error_marker.text, Alerts.LAST_NAME_IS_INVALID)
+    if registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR):
+        check.equal(registration_pop_up.last_name_error_marker.text, Alerts.LAST_NAME_HAS_TO)
     check.is_in('is-invalid', registration_pop_up.field_last_name.get_attribute("class"))
+
+
+@allure.feature('Registration')
+@allure.description('Test for trim function in "Last name" field')
+@pytest.mark.parametrize('last_name', UserTestData.TRIM_DATA)
+def test_unsuccessful_registration_trim_in_last_name(driver, main_page, last_name):
+    registration_pop_up = main_page.open_registration_pop_up()
+    with allure.step('Enter correct data with space in "Last name" field'):
+        registration_pop_up.enter_last_name(last_name)
+    with allure.step('Click on other field'):
+        registration_pop_up.field_password.click()
+    check.is_false(registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR))
+    check.is_in('ng-valid', registration_pop_up.field_last_name.get_attribute("class"))
 
 
 @allure.feature('Registration')

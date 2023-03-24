@@ -18,8 +18,8 @@ class UserTestData:
     INCORRECT_NAME_DATA = ['Василий', '@#$%', '12345', 'John James', 'John123', '098James', '1', '@', 'ы',
                            'qwe123rtyuiopasdfghjklzx', 'qwer@#$tyuiopasdfghjklzx', 'qwertyuЭЭЭЭЭiopasdfghjklzx']
     INCORRECT_LENGTH_DATA = ['a', 'Q', 'qwertyuiopasdfghjklzx']
+    TRIM_DATA = [' Alex', 'Alex ', ' Alex ']
 
 
 
 
-# TODO: Make user`s data generation from file .json
