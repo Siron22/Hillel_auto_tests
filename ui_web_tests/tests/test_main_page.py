@@ -32,9 +32,9 @@ def test_main_page_text_on_main(driver, main_page):
 
 
 
-@allure.title('Test for main page video')
+@allure.title('Test for main page video is visible')
 def test_main_page_video_displayed(driver, main_page):
-    assert main_page.element_is_visible(main_page.VIDEO_LOCATOR)
+    assert main_page.video.is_displayed()
 
 
 @allure.title('Test for main page facebook link')

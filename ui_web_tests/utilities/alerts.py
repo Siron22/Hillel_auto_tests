@@ -9,7 +9,8 @@ class Alerts:
     LAST_NAME_REQUIRED = "Last name required"
     NAME_IS_INVALID = "Name is invalid"
     LAST_NAME_IS_INVALID = "Last name is invalid"
-    PASS_HAVE_TO = "Password has to be from 8 to 15 characters " \
-                   "long and contain at least one integer, one capital, and one small letter"
+    PASS_HAVE_TO = "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, " \
+                   "and one small letter"
     NAME_HAS_TO = "Name has to be from 2 to 20 characters long"
     LAST_NAME_HAS_TO = "Last name has to be from 2 to 20 characters long"
+    PASS_NOT_MATCH = "Passwords do not match"

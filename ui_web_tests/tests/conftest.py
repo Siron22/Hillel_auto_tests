@@ -42,6 +42,7 @@ def unregistered_user():
     return User('Andreas', 'Niolass', 'Sha.Windl@gmail.com', 'Wednesday5XxXx')
 
 
+
 @pytest.fixture()
 def main_page(driver):
     main_page = MainPage(driver)
@@ -55,10 +56,6 @@ def authorization(main_page, registered_user):
     garage_page = log_in_pop_up.successful_login(registered_user.email, registered_user.password)
     return garage_page
 
-@pytest.fixture()
-def remove_user(driver):
-    settings = Sidebar(driver).open_settings_page()
-    settings.click_remove_my_account()
 
 @pytest.fixture()
 def sidebar(driver):

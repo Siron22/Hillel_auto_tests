@@ -1,5 +1,4 @@
 import allure
-from ui_web_tests.pages.navigation_elements.sidebar import Sidebar
 
 """Tests for user profile"""
 

@@ -2,7 +2,7 @@ import allure
 import pytest
 from pytest_check import check
 from ui_web_tests.utilities.alerts import Alerts
-from ui_web_tests.utilities.user import UserDataIncorrect
+from ui_web_tests.utilities.user import UserTestData
 
 
 @allure.title('Login pop-up open')
@@ -86,13 +86,13 @@ def test_unsuccessful_login_empty_fields(driver, main_page):
 
 @allure.feature('Login')
 @allure.description('Test for incorrect email')
-@pytest.mark.parametrize('email', UserDataIncorrect.INVALID_EMAIL_DATA)
+@pytest.mark.parametrize('email', UserTestData.INVALID_EMAIL_DATA)
 def test_unsuccessful_login_incorrect_email(driver, main_page, email):
     log_in_pop_up = main_page.open_log_in_pop_up()
     with allure.step("Enter incorrect data in email field"):
         log_in_pop_up.enter_email(email)
     with allure.step("Enter random value in password field"):
-        log_in_pop_up.enter_password(UserDataIncorrect.RANDOM_PASSWORD)
+        log_in_pop_up.enter_password(UserTestData.VALID_PASSWORD)
     check.is_false(log_in_pop_up.button_login.is_enabled())
     check.is_true(log_in_pop_up.element_is_not_visible(log_in_pop_up.PASSWORD_ERROR_MARKER_LOCATOR))
     check.is_true(log_in_pop_up.element_is_visible(log_in_pop_up.EMAIL_ERROR_MARKER_LOCATOR))
@@ -107,7 +107,7 @@ def test_unsuccessful_login_incorrect_password(driver, main_page, registered_use
     with allure.step("Enter correct data in email field"):
         log_in_pop_up.enter_email(registered_user.email)
     with allure.step("Enter incorrect value in password field"):
-        log_in_pop_up.enter_password(UserDataIncorrect.RANDOM_PASSWORD)
+        log_in_pop_up.enter_password(UserTestData.VALID_PASSWORD)
     check.is_true(log_in_pop_up.button_login.is_enabled())
     log_in_pop_up.click_login_button()
     check.is_true(log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR))
@@ -120,9 +120,9 @@ def test_unsuccessful_login_incorrect_password(driver, main_page, registered_use
 def test_unsuccessful_login_unregistered_user(driver, main_page):
     log_in_pop_up = main_page.open_log_in_pop_up()
     with allure.step("Enter  in email field unregistered email"):
-        log_in_pop_up.enter_email(UserDataIncorrect.UNREGISTERED_EMAIL)
+        log_in_pop_up.enter_email(UserTestData.UNREGISTERED_EMAIL)
     with allure.step("Enter incorrect value in password field"):
-        log_in_pop_up.enter_password(UserDataIncorrect.RANDOM_PASSWORD)
+        log_in_pop_up.enter_password(UserTestData.VALID_PASSWORD)
     check.is_true(log_in_pop_up.button_login.is_enabled())
     log_in_pop_up.click_login_button()
     check.is_true(log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR))

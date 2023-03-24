@@ -19,9 +19,14 @@ class RegistrationPopUp(BasePage):
     EMAIL_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupEmail']/following-sibling::div/p")
     PASSWORD_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupPassword']/following-sibling::div/p")
     RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR = (By.XPATH, "//input[@id='signupRepeatPassword']/following-sibling::div/p")
+    USER_EXIST_ERROR_MARKER_LOCATOR = (By.CSS_SELECTOR, "p.alert")
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
+
+    @property
+    def user_exist_error_marker(self):
+        return self.element(RegistrationPopUp.USER_EXIST_ERROR_MARKER_LOCATOR)
 
     @property
     def name_error_marker(self):

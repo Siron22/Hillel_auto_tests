@@ -7,13 +7,17 @@ class User:
         self.password = password
 
 
-class UserDataIncorrect:
+class UserTestData:
 
     INVALID_EMAIL_DATA = ['abc@', 'abc@com', '@com.ua', 'emailcom.ua', '#$%^&*@com.ua']
     UNREGISTERED_EMAIL = 'abc@test.com'
-    RANDOM_PASSWORD = 'Aa12345678'
-    INCORRECT_PASSWORD_DATA = []
-    INCORRECT_NAME_DATA = ['Василий', '@#$%', '12345', 'John James']
+    VALID_PASSWORD = 'Aa123456'
+    OTHER_PASSWORD = 'Qq654321'
+    INCORRECT_PASSWORD_DATA = ['Qq12345', 'Qq12345678901234', '12345678', 'AbCdEfGh', 'ABCDEFGH', 'abcdefgh',
+                               'QQ123456', 'qq123456', 'Ыы123456', '1234QqЫы' 'Qq1234ыы', 'Qq123456Ыы']
+    INCORRECT_NAME_DATA = ['Василий', '@#$%', '12345', 'John James', 'John123', '098James', '1', '@', 'ы',
+                           'qwe123rtyuiopasdfghjklzx', 'qwer@#$tyuiopasdfghjklzx', 'qwertyuЭЭЭЭЭiopasdfghjklzx']
+    INCORRECT_LENGTH_DATA = ['a', 'Q', 'qwertyuiopasdfghjklzx']
 
 
 
