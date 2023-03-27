@@ -7,6 +7,16 @@ setup(name='Hillel_auto_tests',
       install_requires=['pytest',
                         'selenium',
                         'webdriver-manager',
-                        'allure-pytest'
+                        'allure-pytest',
+                        'allure-pytest',
+                        'allure-python-commons',
+                        'pylint-gitlab',
+                        'pylint-pytest',
+                        'pytest-check',
+                        'pytest-xdist',
+                        'webdriver-manager',
+                        'pylint'
                         ]
       )
+
+
