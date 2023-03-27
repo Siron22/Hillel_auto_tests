@@ -9,7 +9,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 from ui_web_tests.pages.navigation_elements.sidebar import Sidebar
 from ui_web_tests.utilities.browsers import Browser
-from ui_web_tests.utilities.useful_func import get_browser_name, get_screenshot_directory
+from settings.useful_func import get_browser_name, get_screenshot_directory
 from ui_web_tests.utilities.project_exceptions import UnsupportedBrowserError
 from ui_web_tests.pages.main_page_elements.main_page import MainPage
 from ui_web_tests.utilities.user import User

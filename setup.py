@@ -15,7 +15,9 @@ setup(name='Hillel_auto_tests',
                         'pytest-check',
                         'pytest-xdist',
                         'webdriver-manager',
-                        'pylint'
+                        'pylint',
+                        'jsonpath',
+                        'requests'
                         ]
       )
 

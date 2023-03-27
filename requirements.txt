@@ -8,3 +8,5 @@ pytest-check
 pytest-xdist
 selenium
 webdriver-manager
+jsonpath
+requests
