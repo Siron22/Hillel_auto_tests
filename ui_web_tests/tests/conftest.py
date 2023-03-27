@@ -23,8 +23,15 @@ def browser_name():
 @pytest.fixture()
 def driver(browser_name):
     if browser_name.lower() == Browser.CHROME:
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-        driver.maximize_window()
+        """Options for headless mode"""
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument("USER AGENT")
+        options.add_argument('--window-size=1920,1080')
+        service = ChromeService(executable_path=ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
     elif browser_name.lower() == Browser.FIREFOX:
         driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
         driver.maximize_window()
