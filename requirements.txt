@@ -1,0 +1,10 @@
+allure-pytest
+allure-python-commons
+pylint
+pylint-gitlab
+pylint-pytest
+pytest
+pytest-check
+pytest-xdist
+selenium
+webdriver-manager
