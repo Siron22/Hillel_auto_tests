@@ -1,10 +1,17 @@
 class User:
 
-    def __init__(self, name, lastname, email, password):
+    def __init__(self, name=None, lastname=None, email=None, password=None, user_id=None,
+                 photo_filename="default-user.png", distance_units = "km", currency="usd"):
         self.name = name
         self.lastname = lastname
         self.email = email
         self.password = password
+        self.user_id = user_id
+        self.photo_filename = photo_filename
+        self.distance_units = distance_units
+        self.currency = currency
+
+
 
 
 class UserTestData:

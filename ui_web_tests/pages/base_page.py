@@ -4,7 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from settings.useful_func import get_base_url
+from ui_web_tests.utilities.useful_func import get_base_url
 
 class BasePage(object):
 
