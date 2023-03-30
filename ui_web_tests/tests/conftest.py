@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
-
 from ui_web_tests.pages.navigation_elements.sidebar import Sidebar
 from ui_web_tests.utilities.browsers import Browser
 from ui_web_tests.utilities.useful_func import get_browser_name, get_screenshot_directory

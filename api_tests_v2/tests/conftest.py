@@ -38,8 +38,12 @@ def instructions_ep():
 
 
 @pytest.fixture()
-def registered_user():
+def registered_user_api():
     return User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx", user_id=32358)
+
+@pytest.fixture(scope='session')
+def unregistered_user_api():
+    return User(name='Andreas', lastname='Niolass', email='Sha.Windl@gmail.com', password='Wednesday5XxXx')
 
 
 # @allure.step('Prepare user`s data')
