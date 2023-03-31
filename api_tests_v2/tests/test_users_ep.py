@@ -1,16 +1,17 @@
 import allure
+from pytest_check import check
 
 
-# @allure.title('Delete user')
-# def test_delete_user(users_ep, unregistered_user_api, auth_ep):
-#     login = auth_ep.sign_in(unregistered_user_api.email, unregistered_user_api.password)
-#     print('Status code: ', login.status_code)
-#     print('Json: ', login.json())
-#     import  time
-#     time.sleep(2)
-#     response = users_ep.delete_user()
-#     print('-' * 100)
-#     print('Status code: ', response.status_code)
-#     print('-'*100)
-#     print('Json: ', response.json())
+@allure.title('Get current user')
+def test_current_user(users_ep, auth_ep, registered_user_api):
+    login = auth_ep.sign_in(registered_user_api.email, registered_user_api.password)
+    cookies = login.cookies
+    response = users_ep.get_users_current(cookies=cookies)
+    check.equal(response.status_code, 200)
+    """Tear down. Log out"""
+    auth_ep.log_out()
+
+
+
+
 

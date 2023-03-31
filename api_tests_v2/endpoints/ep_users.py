@@ -6,23 +6,18 @@ from api_tests_v2.sources.config_parcer import get_base_api_url
 class UsersEndpoint:
 
     def __init__(self):
-        self.url = get_base_api_url() +'/users'
-
+        self.url = get_base_api_url() + '/users'
 
     @allure.step('Gets authenticated user data')
-    def get_users_current(self):
-        url = self.url+'/current'
-        return requests.get(url)
-
+    def get_users_current(self, cookies=None):
+        return requests.get(self.url + '/current', cookies=cookies)
 
     @allure.step('Gets authenticated user profile data')
-    def get_users_profile(self):
-        url = self.url + '/profile'
-        return requests.get(url)
+    def get_users_profile(self, cookies=None):
+        return requests.get(self.url + '/profile', cookies=cookies)
 
     @allure.step('Edits user profile')
-    def edit_user_profile(self, name='', photo='', last_name='', date_birth='', country=''):
-        url = self.url + '/profile'
+    def edit_user_profile(self, name='', photo='', last_name='', date_birth='', country='', cookies=None):
         json = {
             "photo": photo,
             "name": name,
@@ -30,51 +25,40 @@ class UsersEndpoint:
             "dateBirth": date_birth,
             "country": country
         }
-        return requests.put(url, json=json)
+        return requests.put(self.url + '/profile', json=json, cookies=cookies)
 
     @allure.step('Gets authenticated user settings data')
-    def get_users_setting(self):
-        url = self.url + '/settings'
-        return requests.get(url)
+    def get_users_setting(self, cookies=None):
+        return requests.get(self.url + '/settings', cookies=cookies)
 
     @allure.step('Edits user settings')
-    def edit_user_setting(self, currency="usd", distance_units="km"):
-        url = self.url + '/profile'
+    def edit_user_setting(self, currency="usd", distance_units="km", cookies=None):
         json = {
-                  "currency": currency,
-                  "distanceUnits": distance_units
-                }
-        return requests.put(url, json)
+            "currency": currency,
+            "distanceUnits": distance_units
+        }
+        return requests.put(self.url + '/profile', json, cookies=cookies)
 
     @allure.step('Changes user email')
-    def change_user_email(self, email:str, password:str):
-        url = self.url + '/email'
+    def change_user_email(self, email: str, password: str, cookies=None):
         json = {
-                  "email": email,
-                  "password": password
-                }
-        return requests.put(url, json=json)
+            "email": email,
+            "password": password
+        }
+        return requests.put(self.url + '/email', json=json, cookies=cookies)
 
     @allure.step('Changes user password')
-    def change_user_password(self, old_password:str, new_password:str):
-        url = self.url + '/password'
+    def change_user_password(self, old_password: str, new_password: str, cookies=None):
         json = {
-                  "oldPassword": old_password,
-                  "password": new_password,
-                  "repeatPassword": new_password
-                }
-        return requests.put(url, json=json)
+            "oldPassword": old_password,
+            "password": new_password,
+            "repeatPassword": new_password
+        }
+        return requests.put(self.url + '/password', json=json, cookies=cookies)
 
     @allure.step('Deletes user account and current user session')
-    def delete_user(self):
-        url = self.url
-        return requests.delete(url)
-
-
-
-
-
-
+    def delete_user(self, cookies=None):
+        return requests.delete(self.url, cookies=cookies)
 
 
 """Client test code"""
@@ -94,4 +78,3 @@ class UsersEndpoint:
 # print('-'*100)
 # print('Cookies: ', response.cookies)
 # print('-'*100)
-
