@@ -26,7 +26,6 @@ def test_sign_up(auth_ep, users_ep, unregistered_user_api):
       }
     } 
     """
-    cookies = response.cookies
     assert response.status_code == 201
     check.equal(response.json()["status"], "ok")
     check.equal(response.json()["data"]["distanceUnits"], "km")

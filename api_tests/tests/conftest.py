@@ -4,14 +4,12 @@ import allure
 import pytest
 import requests
 from randomuser import RandomUser
-from api_tests_v2.endpoints.ep_auth import AuthEndpoint
-from api_tests_v2.endpoints.ep_cars import CarsEndpoint
-from api_tests_v2.endpoints.ep_expenses import ExpensesEndpoint
-from api_tests_v2.endpoints.ep_instructions import InstructionsEndpoint
-from api_tests_v2.endpoints.ep_users import UsersEndpoint
-from api_tests_v2.instances.user import User
-from endpoints.ep_auth import AuthEndpoint_S
-from endpoints.ep_users import UsersEndpoint_S
+from api_tests.endpoints.ep_auth import AuthEndpoint
+from api_tests.endpoints.ep_cars import CarsEndpoint
+from api_tests.endpoints.ep_expenses import ExpensesEndpoint
+from api_tests.endpoints.ep_instructions import InstructionsEndpoint
+from api_tests.endpoints.ep_users import UsersEndpoint
+from api_tests.instances.user import User
 
 
 @pytest.fixture()
@@ -32,12 +30,12 @@ def session():
 
 @pytest.fixture()
 def auth_ep(session):
-    yield AuthEndpoint_S(session)
+    yield AuthEndpoint(session)
 
 
 @pytest.fixture()
 def users_ep(session):
-    yield UsersEndpoint_S(session)
+    yield UsersEndpoint(session)
 
 
 @pytest.fixture()
