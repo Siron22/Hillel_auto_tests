@@ -1,2 +1,3 @@
 # my_selenium_test
-My Selenium learning project
+My learning project with UI and API automated tests using Selenium and Requests library
+
