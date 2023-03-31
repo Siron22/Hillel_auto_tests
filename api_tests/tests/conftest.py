@@ -53,12 +53,12 @@ def instructions_ep(session):
     yield InstructionsEndpoint(session)
 
 
-@pytest.fixture()
+@pytest.fixture(name='ru_api')
 def registered_user_api():
     yield User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx", user_id=32358)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(name='uu_api')
 def unregistered_user_api():
     yield User(name='Andreas', lastname='Niolass', email='Sha.Windl@gmail.com', password='Wednesday5XxXx')
 

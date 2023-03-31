@@ -13,9 +13,9 @@ def test_logout(auth_ep):
 
 
 @allure.title('Signup request')
-def test_sign_up(auth_ep, users_ep, unregistered_user_api):
-    response = auth_ep.sign_up(unregistered_user_api.name, unregistered_user_api.lastname,
-                               unregistered_user_api.email, unregistered_user_api.password)
+def test_sign_up(auth_ep, users_ep, uu_api):
+    response = auth_ep.sign_up(uu_api.name, uu_api.lastname,
+                               uu_api.email, uu_api.password)
     """ Response example
    {
     "status": "ok",
@@ -32,12 +32,12 @@ def test_sign_up(auth_ep, users_ep, unregistered_user_api):
     check.equal(response.json()["data"]["currency"], "usd")
     """Tear down. Delete user"""
     del_resp = users_ep.delete_user()
-    assert del_resp.status_code == 200
+    check.equal(del_resp.status_code, 200)
 
 
 @allure.title('Signin request')
-def test_sign_in(auth_ep, registered_user_api):
-    response = auth_ep.sign_in(registered_user_api.email, registered_user_api.password)
+def test_sign_in(auth_ep, ru_api):
+    response = auth_ep.sign_in(ru_api.email, ru_api.password)
     value = {
         "status": "ok",
         "data": {

@@ -10,3 +10,4 @@ class ExpensesEndpoint:
     def __init__(self, session: Session):
         self.url = get_base_api_url() +'/expenses'
         self.session = session
+

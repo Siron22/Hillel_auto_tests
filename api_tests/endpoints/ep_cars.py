@@ -55,5 +55,5 @@ class CarsEndpoint:
         return self.session.post(self.url + '/models' + f'/{car_id}', json=json)
 
     @allure.step('Delete user car by id')
-    def get_user_car_by_id(self, car_id: int):
+    def delete_user_car_by_id(self, car_id: int):
         return self.session.delete(self.url + '/models' + f'/{car_id}')
