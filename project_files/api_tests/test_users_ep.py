@@ -11,6 +11,9 @@ def test_get_current_user(users_ep, auth_ep, ru_api):
     auth_ep.log_out()
 
 
+
+
+
 # @allure.title('Delete user')
 # def test_delete_current_user(users_ep, auth_ep, uu_api):
 #     auth_ep.sign_in(uu_api.email, uu_api.password)
