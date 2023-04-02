@@ -1,7 +1,7 @@
 class User:
 
     def __init__(self, name=None, lastname=None, email=None, password=None, user_id=None,
-                 photo_filename="default-user.png", distance_units="km", currency="usd"):
+                 photo_filename="default-user.png", distance_units="km", currency="usd", country=None, date_birth=None):
         self.name = name
         self.lastname = lastname
         self.email = email
@@ -10,7 +10,14 @@ class User:
         self.photo_filename = photo_filename
         self.distance_units = distance_units
         self.currency = currency
+        self.country = country
+        self.date_birth = date_birth
 
+    def get_user_id(self, response):
+        """Get car id from response of request 'Sign in'
+        """
+        self.user_id = response.json()["data"]["userId"]
+        return self.user_id
 
 class UserTestData:
     INVALID_EMAIL_DATA = ['abc@', 'abc@com', '@com.ua', 'emailcom.ua', '#$%^&*@com.ua']

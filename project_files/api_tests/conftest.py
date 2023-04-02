@@ -51,12 +51,16 @@ def instructions_ep(session):
 
 @pytest.fixture(name='ru_api')
 def registered_user_api():
-    yield User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx", user_id=32358)
-
+    yield User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx", user_id=None)
+# 32358
 
 @pytest.fixture(name='uu_api')
 def unregistered_user_api():
     yield User(name='Andreas', lastname='Niolass', email='Sha.Windl@gmail.com', password='Wednesday5XxXx')
+
+@pytest.fixture(name='eu_api')
+def editable_user_api():
+    yield User(name='Angel', lastname='Wuckert', email='Justice4@gmail.com', password='Monday1XxXx', user_id=32691)
 
 # @allure.step('Prepare user`s data')
 # @pytest.fixture()
