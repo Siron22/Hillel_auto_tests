@@ -14,7 +14,7 @@ class UsersEndpoint:
         return self.session.get(self.url + '/current')
 
     @allure.step('Gets authenticated user profile data')
-    def get_users_profile(self, cookies=None):
+    def get_users_profile(self):
         return self.session.get(self.url + '/profile')
 
     @allure.step('Edits user profile')
@@ -29,7 +29,7 @@ class UsersEndpoint:
         return self.session.put(self.url + '/profile', json=json)
 
     @allure.step('Gets authenticated user settings data')
-    def get_users_setting(self, cookies=None):
+    def get_users_setting(self):
         return self.session.get(self.url + '/settings')
 
     @allure.step('Edits user settings')
@@ -38,7 +38,7 @@ class UsersEndpoint:
             "currency": currency,
             "distanceUnits": distance_units
         }
-        return self.session.put(self.url + '/profile', json)
+        return self.session.put(self.url + '/settings', json=json)
 
     @allure.step('Changes user email')
     def change_user_email(self, email: str, password: str):
@@ -58,7 +58,7 @@ class UsersEndpoint:
         return self.session.put(self.url + '/password', json=json)
 
     @allure.step('Deletes user account and current user session')
-    def delete_user(self, cookies=None):
+    def delete_user(self):
         return self.session.delete(self.url)
 
 

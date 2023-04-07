@@ -19,6 +19,12 @@ class User:
         self.user_id = response.json()["data"]["userId"]
         return self.user_id
 
+
+class UserValidData:
+    CURRENCY = ["eur", "gbp", "usd", "uah", "pln"]
+    DISTANCE_UNITS = ["km", "ml"]
+
+
 class UserTestData:
     INVALID_EMAIL_DATA = ['abc@', 'abc@com', '@com.ua', 'emailcom.ua', '#$%^&*@com.ua']
     UNREGISTERED_EMAIL = 'abc@test.com'

@@ -18,11 +18,15 @@ def session():
 
 
 # @pytest.fixture()
-# def session():
+# def session(teardown_requests=None):
 #     session = requests.Session()
 #     yield session
 #     session.close()
 
+@pytest.fixture()
+def teardown_logout(auth_ep):
+    yield
+    auth_ep.log_out()
 
 @pytest.fixture()
 def auth_ep(session):
@@ -52,11 +56,14 @@ def instructions_ep(session):
 @pytest.fixture(name='ru_api')
 def registered_user_api():
     yield User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx", user_id=None)
+
+
 # 32358
 
 @pytest.fixture(name='uu_api')
 def unregistered_user_api():
     yield User(name='Andreas', lastname='Niolass', email='Sha.Windl@gmail.com', password='Wednesday5XxXx')
+
 
 @pytest.fixture(name='eu_api')
 def editable_user_api():
