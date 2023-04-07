@@ -65,7 +65,9 @@ def test_successful_login(driver, main_page, registered_user):
     garage_page = log_in_pop_up.successful_login(registered_user.email, registered_user.password)
     assert garage_page.page_title.is_displayed()
 
+
 """Negative tests"""
+
 
 @allure.feature('Login')
 @allure.description('Test for all empty fields')
@@ -97,9 +99,8 @@ def test_unsuccessful_login_incorrect_email(driver, main_page, email):
         log_in_pop_up.enter_password(UserTestData.VALID_PASSWORD)
     check.is_false(log_in_pop_up.button_login.is_enabled())
     check.is_true(log_in_pop_up.element_is_not_visible(log_in_pop_up.PASSWORD_ERROR_MARKER_LOCATOR))
-    check.is_true(log_in_pop_up.element_is_visible(log_in_pop_up.EMAIL_ERROR_MARKER_LOCATOR))
-    if log_in_pop_up.element_is_visible(log_in_pop_up.EMAIL_ERROR_MARKER_LOCATOR):
-        check.equal(log_in_pop_up.email_error_marker.text, Alerts.EMAIL_IS_INCORRECT)
+    assert log_in_pop_up.element_is_visible(log_in_pop_up.EMAIL_ERROR_MARKER_LOCATOR)
+    check.equal(log_in_pop_up.email_error_marker.text, Alerts.EMAIL_IS_INCORRECT)
 
 
 @allure.feature('Login')
@@ -110,11 +111,9 @@ def test_unsuccessful_login_incorrect_password(driver, main_page, registered_use
         log_in_pop_up.enter_email(registered_user.email)
     with allure.step("Enter incorrect value in password field"):
         log_in_pop_up.enter_password(UserTestData.VALID_PASSWORD)
-    check.is_true(log_in_pop_up.button_login.is_enabled())
     log_in_pop_up.click_login_button()
-    check.is_true(log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR))
-    if log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR):
-        check.equal(log_in_pop_up.alert_wrong_email_or_password.text, Alerts.WRONG_EMAIL_OR_PASSWORD)
+    assert log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR)
+    check.equal(log_in_pop_up.alert_wrong_email_or_password.text, Alerts.WRONG_EMAIL_OR_PASSWORD)
 
 
 @allure.feature('Login')
@@ -125,11 +124,6 @@ def test_unsuccessful_login_unregistered_user(driver, main_page):
         log_in_pop_up.enter_email(UserTestData.UNREGISTERED_EMAIL)
     with allure.step("Enter incorrect value in password field"):
         log_in_pop_up.enter_password(UserTestData.VALID_PASSWORD)
-    check.is_true(log_in_pop_up.button_login.is_enabled())
     log_in_pop_up.click_login_button()
-    check.is_true(log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR))
-    if log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR):
-        check.equal(log_in_pop_up.alert_wrong_email_or_password.text, Alerts.WRONG_EMAIL_OR_PASSWORD)
-
-
-
+    assert log_in_pop_up.element_is_visible(log_in_pop_up.ALERT_WRONG_EMAIL_OR_PASSWORD_LOCATOR)
+    check.equal(log_in_pop_up.alert_wrong_email_or_password.text, Alerts.WRONG_EMAIL_OR_PASSWORD)

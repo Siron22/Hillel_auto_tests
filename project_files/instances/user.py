@@ -38,14 +38,3 @@ class UserTestData:
     TRIM_DATA = [' Alex', 'Alex ', ' Alex ']
 
 
-registered_user_data = {
-    "name": "Anne",
-    "lastName": "Beatty",
-    "email": "Etha_Lind@gmail.com",
-    "password": "Sunday1XxXx",
-    "repeatPassword": "Sunday1XxXx",
-    "userId": 32358,
-    "photoFilename": "default-user.png",
-    "distanceUnits": "km",
-    "currency": "usd"
-}

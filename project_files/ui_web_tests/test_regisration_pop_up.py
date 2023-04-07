@@ -93,9 +93,8 @@ def test_unsuccessful_registration_incorrect_value_name(driver, main_page, name)
         registration_pop_up.field_password.click()
     length = len(name)
     if 2 <= length <= 20 :
-        check.is_true(registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR))
-        if registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR):
-            check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_IS_INVALID)
+        assert registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR)
+        check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_IS_INVALID)
         check.is_in('is-invalid', registration_pop_up.field_name.get_attribute("class"))
     else:
         markers = driver.find_elements(By.XPATH, "//input[@id='signupName']/following-sibling::div/p")
@@ -116,9 +115,8 @@ def test_unsuccessful_registration_incorrect_length_name(driver, main_page, name
         registration_pop_up.enter_name(name)
     with allure.step('Click on other field'):
         registration_pop_up.field_password.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_HAS_TO)
+    assert registration_pop_up.element_is_visible(registration_pop_up.NAME_ERROR_MARKER_LOCATOR)
+    check.equal(registration_pop_up.name_error_marker.text, Alerts.NAME_HAS_TO)
     check.is_in('is-invalid', registration_pop_up.field_name.get_attribute("class"))
 
 
@@ -147,9 +145,8 @@ def test_unsuccessful_registration_incorrect_value_last_name(driver, main_page, 
         registration_pop_up.field_password.click()
     length = len(last_name)
     if 2 <= length <= 20 :
-        check.is_true(registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR))
-        if registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR):
-            check.equal(registration_pop_up.last_name_error_marker.text, Alerts.LAST_NAME_IS_INVALID)
+        assert registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR)
+        check.equal(registration_pop_up.last_name_error_marker.text, Alerts.LAST_NAME_IS_INVALID)
         check.is_in('is-invalid', registration_pop_up.field_last_name.get_attribute("class"))
     else:
         """Tests for both error markers"""
@@ -171,9 +168,8 @@ def test_unsuccessful_registration_incorrect_length_last_name(driver, main_page,
         registration_pop_up.enter_last_name(last_name)
     with allure.step('Click on other field'):
         registration_pop_up.field_password.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.last_name_error_marker.text, Alerts.LAST_NAME_HAS_TO)
+    assert registration_pop_up.element_is_visible(registration_pop_up.LAST_NAME_ERROR_MARKER_LOCATOR)
+    check.equal(registration_pop_up.last_name_error_marker.text, Alerts.LAST_NAME_HAS_TO)
     check.is_in('is-invalid', registration_pop_up.field_last_name.get_attribute("class"))
 
 
@@ -199,9 +195,8 @@ def test_unsuccessful_registration_incorrect_email(driver, main_page, email):
         registration_pop_up.enter_email(email)
     with allure.step("Click on other field"):
         registration_pop_up.field_password.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.EMAIL_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.EMAIL_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.email_error_marker.text, Alerts.EMAIL_IS_INCORRECT)
+    assert registration_pop_up.element_is_visible(registration_pop_up.EMAIL_ERROR_MARKER_LOCATOR)
+    check.equal(registration_pop_up.email_error_marker.text, Alerts.EMAIL_IS_INCORRECT)
     check.is_in('is-invalid', registration_pop_up.field_email.get_attribute("class"))
 
 
@@ -216,9 +211,8 @@ def test_unsuccessful_registration_incorrect_re_enter_password(driver, main_page
         registration_pop_up.enter_password(password)
     with allure.step("Click on other field"):
         registration_pop_up.field_email.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.PASSWORD_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.PASSWORD_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.password_error_marker.text, Alerts.PASS_HAVE_TO)
+    assert registration_pop_up.element_is_visible(registration_pop_up.PASSWORD_ERROR_MARKER_LOCATOR)
+    check.equal(registration_pop_up.password_error_marker.text, Alerts.PASS_HAVE_TO)
     check.is_in('is-invalid', registration_pop_up.field_password.get_attribute("class"))
 
 
@@ -233,9 +227,8 @@ def test_unsuccessful_registration_incorrect_password(driver, main_page, passwor
         registration_pop_up.reenter_password(password)
     with allure.step("Click on other field"):
         registration_pop_up.field_email.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.re_enter_password_error_marker.text, Alerts.PASS_HAVE_TO)
+    assert registration_pop_up.element_is_visible(registration_pop_up.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR)
+    check.equal(registration_pop_up.re_enter_password_error_marker.text, Alerts.PASS_HAVE_TO)
     check.is_in('is-invalid', registration_pop_up.field_reenter_password.get_attribute("class"))
 
 
@@ -249,7 +242,7 @@ def test_unsuccessful_registration_re_enter_password_not_match(driver, main_page
         registration_pop_up.reenter_password(UserTestData.OTHER_PASSWORD)
     with allure.step("Click on other field"):
         registration_pop_up.field_email.click()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR))
+    assert registration_pop_up.element_is_visible(registration_pop_up.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR)
     if registration_pop_up.element_is_visible(registration_pop_up.RE_ENTER_PASSWORD_ERROR_MARKER_LOCATOR):
         check.equal(registration_pop_up.re_enter_password_error_marker.text, Alerts.PASS_NOT_MATCH)
     check.is_in('is-invalid', registration_pop_up.field_reenter_password.get_attribute("class"))
@@ -271,9 +264,8 @@ def test_unsuccessful_registration_registered_user(driver, main_page, registered
         registration_pop_up.reenter_password(unregistered_user.password)
     with allure.step('Click "Registration" button'):
         registration_pop_up.click_registration_button()
-    check.is_true(registration_pop_up.element_is_visible(registration_pop_up.USER_EXIST_ERROR_MARKER_LOCATOR))
-    if registration_pop_up.element_is_visible(registration_pop_up.USER_EXIST_ERROR_MARKER_LOCATOR):
-        check.equal(registration_pop_up.user_exist_error_marker.text, Alerts.USER_ALREADY_EXISTS)
+    assert registration_pop_up.element_is_visible(registration_pop_up.USER_EXIST_ERROR_MARKER_LOCATOR)
+    check.equal(registration_pop_up.user_exist_error_marker.text, Alerts.USER_ALREADY_EXISTS)
 
 
 

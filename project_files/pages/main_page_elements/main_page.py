@@ -169,11 +169,11 @@ class MainPage(BasePage):
         self.link_email.click()
 
     @allure.step('Launch video')
-    def click_link_email(self):
+    def click_launch_video(self):
         self.video.click()
 
     @allure.step('Pause video')
-    def click_link_email(self):
+    def click_pause_video(self):
         self.movie_player.click()
 
 

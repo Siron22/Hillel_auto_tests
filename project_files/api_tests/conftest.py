@@ -51,10 +51,8 @@ def instructions_ep(session):
 
 @pytest.fixture(name='ru_api')
 def registered_user_api():
-    yield User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx", user_id=None)
+    yield User(name="Anne", lastname="Beatty", email="Etha_Lind@gmail.com", password="Sunday1XxXx")
 
-
-# 32358
 
 @pytest.fixture(name='uu_api')
 def unregistered_user_api():
