@@ -23,10 +23,6 @@ def session():
 #     yield session
 #     session.close()
 
-@pytest.fixture()
-def teardown_logout(auth_ep):
-    yield
-    auth_ep.log_out()
 
 @pytest.fixture()
 def auth_ep(session):
@@ -69,7 +65,7 @@ def unregistered_user_api():
 def editable_user_api():
     yield User(name='Angel', lastname='Wuckert', email='Justice4@gmail.com', password='Monday1XxXx', user_id=32691)
 
-# @allure.step('Prepare user`s data')
+
 # @pytest.fixture()
 # def user_with_random_data():
 #     randomuser = RandomUser()
