@@ -137,9 +137,9 @@ def test_edit_users_settings_dist(users_ep, auth_ep, ru_api, distance_units):
         check.equal(response_json["data"]["currency"], "usd")
         check.equal(response_json["data"]["distanceUnits"], distance_units)
     """Tear down. Default settings and log out"""
-
     users_ep.edit_user_setting()
     auth_ep.log_out()
+
 
 
 # @allure.title('Delete user')
