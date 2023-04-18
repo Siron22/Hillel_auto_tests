@@ -22,4 +22,3 @@ setup(name='Hillel_auto_tests',
                         ]
       )
 
-
